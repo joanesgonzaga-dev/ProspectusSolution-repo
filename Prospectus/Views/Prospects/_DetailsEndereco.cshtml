@@ -1,0 +1,72 @@
+﻿@model Prospectus.Models.Endereco
+<div>
+    <hr />
+    <h4>Endereço</h4>
+</div>
+
+@if (Model != null)
+{
+<table class="table table-hover">
+    <thead class="thead-dark">
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Logradouro)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Numero)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Complemento)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Bairro)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.CEP)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.UF)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Cidade)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+
+        <tr>
+            <td>
+                @Html.DisplayFor(model => model.Logradouro)
+            </td>
+            <td>
+                @Html.DisplayFor(model => model.Numero)
+            </td>
+            <td>
+                @Html.DisplayFor(model => model.Complemento)
+            </td>
+            <td>
+                @Html.DisplayFor(model => model.Bairro)
+            </td>
+            <td>
+                @Html.DisplayFor(model => model.CEP)
+            </td>
+            <td>
+                @Html.DisplayFor(model => model.UF)
+            </td>
+            <td>
+                @Html.DisplayFor(model => model.Cidade)
+            </td>
+            <td>
+                @{
+                    //asp-action aponta pra uma Action, mas me qual Controller? 
+                }
+            <a class="btn btn-info" asp-controller="ProspectEnderecos" asp-action="Edit" asp-route-id="@Model.Id" ><span title="Editar" class="fa fa-pencil"></span></a>
+            
+</td>
+        </tr>
+
+    </tbody>
+</table>
+
+}

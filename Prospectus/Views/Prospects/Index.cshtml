@@ -1,0 +1,75 @@
+﻿@using Prospectus.Extensions
+@model IEnumerable<Prospectus.Models.Prospect>
+
+@{
+    ViewData["Title"] = "Lista de Prospects";
+}
+
+<h3 style="padding-top: 50px">@ViewData["Title"]</h3>
+<hr />
+<p>
+    <a class="btn btn-info" asp-action="Create">Adicionar</a>
+</p>
+<table class="table table-hover">
+    <thead class="thead-dark">
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Nome)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.PessoaContato)
+            </th>
+
+            <th width="180px">
+                @Html.DisplayNameFor(model => model.Ramo)
+            </th>
+
+            <th>
+                @Html.DisplayNameFor(model => model.Recepcao)
+            </th>
+
+            <th width="180px">
+                @Html.DisplayNameFor(model => model.SatisfacaoCenario)
+            </th>
+
+            <th>
+                @Html.DisplayNameFor(model => model.DataRetorno)
+            </th>
+
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Nome)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.PessoaContato)
+            </td>
+
+            <td>
+                @Html.DisplayFor(modelItem => item.Ramo)
+            </td>
+
+            <td>
+                @this.FormataReceptividade(item.Recepcao)
+            </td>
+            <td>
+                @this.FormataSatisfacaoCenario(item.SatisfacaoCenario)
+            </td>
+
+            <td>
+                @Html.DisplayFor(modelItem => item.DataRetorno)
+            </td>
+
+            <td class="text-right" width="160px">
+                <a class="btn btn-info" asp-action="Details" asp-route-id="@item.Id"><span class="fa fa-search"></span></a>
+                <a class="btn btn-warning" asp-action="Edit" asp-route-id="@item.Id"><span class="fa fa-pencil"></span></a>
+                <a class="btn btn-danger" asp-action="Delete" asp-route-id="@item.Id"><span class="fa fa-trash"></span></a>
+            </td>
+        </tr>
+}
+    </tbody>
+</table>
