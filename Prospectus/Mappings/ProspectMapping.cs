@@ -73,8 +73,8 @@ namespace Prospectus.Mappings
 
 
             builder.HasOne(p => p.Endereco)
-                .WithOne(e => e.Prospect);
-                //.OnDelete(DeleteBehavior.SetNull);
+                .WithOne(e => e.Prospect)
+                .OnDelete(DeleteBehavior.Restrict);
 
 
 

@@ -13,7 +13,7 @@ namespace Prospectus.Models
         public Prospect()
         {
             DataVisita = DateTime.Today;
-            //Endereco = new Endereco();
+            Endereco = new Endereco();
         }
 
         [Required(ErrorMessage = "O campo {0} é obrigatório")]

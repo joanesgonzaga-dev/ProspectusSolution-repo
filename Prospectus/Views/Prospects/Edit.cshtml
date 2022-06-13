@@ -6,99 +6,98 @@
 
 <h3 style="padding-top: 50px ">Editar Prospect</h3>
 <hr />
+<form asp-action="Edit">
+    <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+    <div class="form-row">
+        <div class="form-group col-md-6">
 
-        <form asp-action="Edit">
-
-            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-
-            <div class="form-row">
-                <div class="form-group col-md-6">
-
-                    <div class="form-group">
-                        <label asp-for="Nome" class="control-label"></label>
-                        <input asp-for="Nome" class="form-control" />
-                        <span asp-validation-for="Nome" class="text-danger"></span>
-                    </div>
-
-                    <div class="form-group">
-                        <label asp-for="Ramo" class="control-label"></label>
-                        <input asp-for="Ramo" class="form-control" />
-                        <span asp-validation-for="Ramo" class="text-danger"></span>
-                    </div>
-
-                    <div class="form-group">
-                        <label asp-for="Observacoes" class="control-label"></label>
-                        <input asp-for="Observacoes" class="form-control" />
-                        <span asp-validation-for="Observacoes" class="text-danger"></span>
-                    </div>
-                    <div class="form-group">
-                        <label asp-for="DataVisita" class="control-label">Data da Visita  </label>
-                        <input asp-for="DataVisita" class="form-control" />
-                        <span asp-validation-for="DataVisita" class="text-danger"></span>
-                    </div>
-
-                    <div class="form-group form-check">
-                        <label class="form-check-label">
-                            <input class="form-check-input" asp-for="Cenario" /> @Html.DisplayNameFor(model => model.Cenario)
-                        </label>
-                    </div>
-
-                    <div class="form-group">
-                        <label asp-for="SatisfacaoCenario" class="control-label"></label><br />
-                        <input type="radio" value="5" asp-for="SatisfacaoCenario" checked="@((int)Model.SatisfacaoCenario == 5)" /> Ótimo
-                        <input type="radio" value="4" asp-for="SatisfacaoCenario" checked="@((int)Model.SatisfacaoCenario == 4)" /> Bom
-                        <input type="radio" value="3" asp-for="SatisfacaoCenario" checked="@((int)Model.SatisfacaoCenario == 3)" /> Regular
-                        <input type="radio" value="2" asp-for="SatisfacaoCenario" checked="@((int)Model.SatisfacaoCenario == 2)" /> Ruim
-                        <input type="radio" value="1" asp-for="SatisfacaoCenario" checked="@((int)Model.SatisfacaoCenario == 1)" /> Péssimo
-                    </div>
-                </div>
-
-                <div class="form-group col-md-6">
-                    <!--Aqui-->
-                    <div class="form-group">
-                        <label asp-for="PessoaContato" class="control-label"></label>
-                        <input asp-for="PessoaContato" class="form-control" />
-                        <span asp-validation-for="PessoaContato" class="text-danger"></span>
-                    </div>
-
-                    <div class="form-group">
-                        <label asp-for="Oportunidade" class="control-label"></label>
-                        <input asp-for="Oportunidade" class="form-control" />
-                        <span asp-validation-for="Oportunidade" class="text-danger"></span>
-                    </div>
-
-                    <div class="form-group">
-                        <label asp-for="IndicadorId" class="control-label">Indicador</label>
-                        <select asp-for="IndicadorId" class="form-control" asp-items="ViewBag.IndicadorId"></select>
-                        <span asp-validation-for="IndicadorId" class="text-danger"></span>
-                    </div>
-
-                    <div class="form-group">
-                        <label asp-for="DataRetorno" class="control-label">Data de retorno</label>
-                        <input asp-for="DataRetorno" class="form-control" />
-                        <span asp-validation-for="DataRetorno" class="text-danger"></span>
-                    </div>
-
-                    <div class="form-group">
-                        <label asp-for="Recepcao" class="control-label"></label><br />
-                        <input type="radio" value="5" asp-for="Recepcao" checked="@((int)Model.Recepcao == 5)" /> Muito interessado
-                        <input type="radio" value="4" asp-for="Recepcao" checked="@((int)Model.Recepcao == 4)" /> Interessado
-                        <input type="radio" value="3" asp-for="Recepcao" checked="@((int)Model.Recepcao == 3)" /> Pouco interessado
-                        <input type="radio" value="2" asp-for="Recepcao" checked="@((int)Model.Recepcao == 2)" /> Nenhum interesse
-                        <input type="radio" value="1" asp-for="Recepcao" checked="@((int)Model.Recepcao == 1)" /> Hostil
-                    </div>
-                </div>
+            <div class="form-group">
+                <label asp-for="Nome" class="control-label"></label>
+                <input asp-for="Nome" class="form-control" />
+                <span asp-validation-for="Nome" class="text-danger"></span>
             </div>
-            
 
-                <partial name="_DetailsEndereco" model="@Model.Endereco" />
+            <div class="form-group">
+                <label asp-for="Ramo" class="control-label"></label>
+                <input asp-for="Ramo" class="form-control" />
+                <span asp-validation-for="Ramo" class="text-danger"></span>
+            </div>
 
-                <div class="form-group">
-                    <input type="submit" value="Salvar" class="btn btn-primary" />
-                    <a class="btn btn-info" asp-action="Index">Voltar</a>
-                </div>
-        </form>
-   <!-- </div>
+            <div class="form-group">
+                <label asp-for="Observacoes" class="control-label"></label>
+                <input asp-for="Observacoes" class="form-control" />
+                <span asp-validation-for="Observacoes" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="DataVisita" class="control-label">Data da Visita  </label>
+                <input asp-for="DataVisita" class="form-control" />
+                <span asp-validation-for="DataVisita" class="text-danger"></span>
+            </div>
+
+            <div class="form-group form-check">
+                <label class="form-check-label">
+                    <input class="form-check-input" asp-for="Cenario" /> @Html.DisplayNameFor(model => model.Cenario)
+                </label>
+            </div>
+
+            <div class="form-group">
+                <label asp-for="SatisfacaoCenario" class="control-label"></label><br />
+                <input type="radio" value="5" asp-for="SatisfacaoCenario" checked="@((int)Model.SatisfacaoCenario == 5)" /> Ótimo
+                <input type="radio" value="4" asp-for="SatisfacaoCenario" checked="@((int)Model.SatisfacaoCenario == 4)" /> Bom
+                <input type="radio" value="3" asp-for="SatisfacaoCenario" checked="@((int)Model.SatisfacaoCenario == 3)" /> Regular
+                <input type="radio" value="2" asp-for="SatisfacaoCenario" checked="@((int)Model.SatisfacaoCenario == 2)" /> Ruim
+                <input type="radio" value="1" asp-for="SatisfacaoCenario" checked="@((int)Model.SatisfacaoCenario == 1)" /> Péssimo
+            </div>
+        </div>
+
+        <div class="form-group col-md-6">
+            <!--Aqui-->
+            <div class="form-group">
+                <label asp-for="PessoaContato" class="control-label"></label>
+                <input asp-for="PessoaContato" class="form-control" />
+                <span asp-validation-for="PessoaContato" class="text-danger"></span>
+            </div>
+
+            <div class="form-group">
+                <label asp-for="Oportunidade" class="control-label"></label>
+                <input asp-for="Oportunidade" class="form-control" />
+                <span asp-validation-for="Oportunidade" class="text-danger"></span>
+            </div>
+
+            <div class="form-group">
+                <label asp-for="IndicadorId" class="control-label">Indicador</label>
+                <select asp-for="IndicadorId" class="form-control" asp-items="ViewBag.IndicadorId"></select>
+                <span asp-validation-for="IndicadorId" class="text-danger"></span>
+            </div>
+
+            <div class="form-group">
+                <label asp-for="DataRetorno" class="control-label">Data de retorno</label>
+                <input asp-for="DataRetorno" class="form-control" />
+                <span asp-validation-for="DataRetorno" class="text-danger"></span>
+            </div>
+
+            <div class="form-group">
+                <label asp-for="Recepcao" class="control-label"></label><br />
+                <input type="radio" value="5" asp-for="Recepcao" checked="@((int)Model.Recepcao == 5)" /> Muito interessado
+                <input type="radio" value="4" asp-for="Recepcao" checked="@((int)Model.Recepcao == 4)" /> Interessado
+                <input type="radio" value="3" asp-for="Recepcao" checked="@((int)Model.Recepcao == 3)" /> Pouco interessado
+                <input type="radio" value="2" asp-for="Recepcao" checked="@((int)Model.Recepcao == 2)" /> Nenhum interesse
+                <input type="radio" value="1" asp-for="Recepcao" checked="@((int)Model.Recepcao == 1)" /> Hostil
+            </div>
+        </div>
+    </div>
+    <!---->
+
+    <div class="form-group">
+        <input type="submit" value="Salvar" class="btn btn-primary" />
+        <a class="btn btn-info" asp-action="Index">Voltar</a>
+    </div>
+
+    <partial name="_DetailsEndereco" model="@Model.Endereco" />
+
+
+</form>
+<!-- </div>
 </div>
        -->
 
