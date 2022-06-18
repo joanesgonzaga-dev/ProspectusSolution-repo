@@ -23,8 +23,8 @@ namespace Prospectus.Mappings
 
             builder.HasMany(i => i.Prospects)
                 .WithOne(p => p.Indicador)
-                .HasForeignKey(p => p.IndicadorId);
-                //.OnDelete(DeleteBehavior.Restrict);
+                .HasForeignKey(p => p.IndicadorId)
+                .OnDelete(DeleteBehavior.Restrict);
 
             //builder.Property(i => i.Prospects);
 

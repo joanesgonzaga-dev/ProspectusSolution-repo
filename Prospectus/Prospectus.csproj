@@ -9,6 +9,18 @@
   <ItemGroup>
     <Compile Remove="Data\Migrations\20220515011122_AddCascadeUpdateEndereco_Prospect.cs" />
     <Compile Remove="Data\Migrations\20220515011122_AddCascadeUpdateEndereco_Prospect.Designer.cs" />
+    <Compile Remove="Data\Migrations\20220613222749_ProdutoMigration.cs" />
+    <Compile Remove="Data\Migrations\20220613222749_ProdutoMigration.Designer.cs" />
+    <Compile Remove="Migrations\20220614004705_InitialDatabase.cs" />
+    <Compile Remove="Migrations\20220614004705_InitialDatabase.Designer.cs" />
+    <Compile Remove="Migrations\20220614005641_InitialDatabase.cs" />
+    <Compile Remove="Migrations\20220614005641_InitialDatabase.Designer.cs" />
+    <Compile Remove="Migrations\20220614010421_InitialDatabase.cs" />
+    <Compile Remove="Migrations\20220614010421_InitialDatabase.Designer.cs" />
+    <Compile Remove="Migrations\20220614010732_InitialDatabase.cs" />
+    <Compile Remove="Migrations\20220614010732_InitialDatabase.Designer.cs" />
+    <Compile Remove="Migrations\20220614011309_InitialDataBase.cs" />
+    <Compile Remove="Migrations\20220614011309_InitialDataBase.Designer.cs" />
   </ItemGroup>
 
   <ItemGroup>
@@ -46,6 +58,11 @@
     <Content Update="wwwroot\prospects.jpg">
       <CopyToOutputDirectory>Never</CopyToOutputDirectory>
     </Content>
+  </ItemGroup>
+
+
+  <ItemGroup>
+    <Folder Include="Data\Migrations\" />
   </ItemGroup>
 
 </Project>

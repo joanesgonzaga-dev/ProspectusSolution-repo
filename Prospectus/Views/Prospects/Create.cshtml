@@ -6,66 +6,22 @@
 
 <h3 style="padding-top: 50px ">Novo Prospect</h3>
 <hr />
-<div class="row">
-    <div class="col-md-4">
-        <form asp-action="Create">
-            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+<form asp-action="Create">
+    <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+    <div class="form-row">
+        <div class="form-group col-md-6">
+
+
             <div class="form-group">
                 <label asp-for="Nome" class="control-label"></label>
                 <input asp-for="Nome" class="form-control" />
                 <span asp-validation-for="Nome" class="text-danger"></span>
             </div>
-            <div class="form-group">
-                <label asp-for="PessoaContato" class="control-label"></label>
-                <input asp-for="PessoaContato" class="form-control" />
-                <span asp-validation-for="PessoaContato" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="DataVisita" class="control-label"></label>
-                <input asp-for="DataVisita" class="form-control" />
-                <span asp-validation-for="DataVisita" class="text-danger"></span>
-            </div>
+
             <div class="form-group">
                 <label asp-for="Ramo" class="control-label"></label>
                 <input asp-for="Ramo" class="form-control" />
                 <span asp-validation-for="Ramo" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="Oportunidade" class="control-label"></label>
-                <input asp-for="Oportunidade" class="form-control" />
-                <span asp-validation-for="Oportunidade" class="text-danger"></span>
-            </div>
-
-
-            <div class="form-group">
-                <label asp-for="Recepcao" class="control-label"></label> <br />
-                <input type="radio" value="5" asp-for="Recepcao" /> Muito interessado
-                <input type="radio" value="4" asp-for="Recepcao" /> Interessado
-                <input type="radio" value="3" asp-for="Recepcao" /> Pouco interessado
-                <input type="radio" value="2" asp-for="Recepcao" /> Nenhum interesse
-                <input type="radio" value="1" asp-for="Recepcao" /> Hostil
-            </div>
-
-
-            <div class="form-group form-check">
-                <label class="form-check-label">
-                    <input class="form-check-input" asp-for="Cenario" /> @Html.DisplayNameFor(model => model.Cenario)
-                </label>
-            </div>
-
-
-            <div class="form-group">
-                <label asp-for="SatisfacaoCenario" class="control-label"></label> <br />
-                <input type="radio" value="5" asp-for="SatisfacaoCenario" /> Ótimo
-                <input type="radio" value="4" asp-for="SatisfacaoCenario" /> Bom
-                <input type="radio" value="3" asp-for="SatisfacaoCenario" /> Regular
-                <input type="radio" value="2" asp-for="SatisfacaoCenario" /> Ruim
-                <input type="radio" value="1" asp-for="SatisfacaoCenario" /> Péssimo
-
-                <!--
-        <select asp-for="SatisfacaoCenario" class="form-control"></select>
-        <span asp-validation-for="SatisfacaoCenario" class="text-danger"></span>  *Unacessary validation for this component *
-        -->
             </div>
 
             <div class="form-group">
@@ -74,38 +30,75 @@
                 <span asp-validation-for="Observacoes" class="text-danger"></span>
             </div>
             <div class="form-group">
+                <label asp-for="DataVisita" class="control-label">Data da Visita  </label>
+                <input asp-for="DataVisita" class="form-control" />
+                <span asp-validation-for="DataVisita" class="text-danger"></span>
+            </div>
+
+            <div class="form-group form-check">
+                <label class="form-check-label">
+                    <input class="form-check-input" asp-for="Cenario" /> @Html.DisplayNameFor(model => model.Cenario)
+                </label>
+            </div>
+
+            <div class="form-group">
+                <label asp-for="SatisfacaoCenario" class="control-label"></label><br />
+                <input type="radio" value="5" asp-for="SatisfacaoCenario" /> Ótimo
+                <input type="radio" value="4" asp-for="SatisfacaoCenario" /> Bom
+                <input type="radio" value="3" asp-for="SatisfacaoCenario" /> Regular
+                <input type="radio" value="2" asp-for="SatisfacaoCenario" /> Ruim
+                <input type="radio" value="1" asp-for="SatisfacaoCenario" /> Péssimo
+            </div>
+        </div>
+
+        <div class="form-group col-md-6">
+            <!--Aqui-->
+            <div class="form-group">
+                <label asp-for="PessoaContato" class="control-label"></label>
+                <input asp-for="PessoaContato" class="form-control" />
+                <span asp-validation-for="PessoaContato" class="text-danger"></span>
+            </div>
+
+            <div class="form-group">
+                <label asp-for="Oportunidade" class="control-label"></label>
+                <input asp-for="Oportunidade" class="form-control" />
+                <span asp-validation-for="Oportunidade" class="text-danger"></span>
+            </div>
+
+            <div class="form-group">
+                <label asp-for="IndicadorId" class="control-label">Indicador</label>
+                <select asp-for="IndicadorId" class="form-control" asp-items="ViewBag.IndicadorId"></select>
+                <span asp-validation-for="IndicadorId" class="text-danger"></span>
+            </div>
+
+            <div class="form-group">
                 <label asp-for="DataRetorno" class="control-label">Data de retorno</label>
                 <input asp-for="DataRetorno" class="form-control" />
                 <span asp-validation-for="DataRetorno" class="text-danger"></span>
             </div>
-            <div class="form-group">
-                <label asp-for="Indicador" class="control-label">Indicador</label>
-                <select asp-for="IndicadorId" class="form-control" asp-items="ViewBag.IndicadorId">
-                    <option></option>
-                </select>
-                <!--a span abaixo pode ser removida para não exigir o campo Indicador-->
-                <span asp-validation-for="IndicadorId" class="text-danger"></span>
-
-            </div>
-
-            <!-- <input type="hidden" asp-for="Id" /> -->
-
-
-
-            <h4>Endereço:</h4>
-            <hr />
-            <partial name="_Endereco" />
-
 
             <div class="form-group">
-                <input type="submit" value="Salvar" class="btn btn-primary" />
-                <a class="btn btn-info" asp-action="Index">Voltar</a>
+                <label asp-for="Recepcao" class="control-label"></label><br />
+                <input type="radio" value="5" asp-for="Recepcao" /> Muito interessado
+                <input type="radio" value="4" asp-for="Recepcao" /> Interessado
+                <input type="radio" value="3" asp-for="Recepcao" /> Pouco interessado
+                <input type="radio" value="2" asp-for="Recepcao" /> Nenhum interesse
+                <input type="radio" value="1" asp-for="Recepcao" /> Hostil
             </div>
-        </form>
+
+        </div>
     </div>
-</div>
 
+    <hr />
+    <h4>Endereço:</h4>
+    <partial name="_Endereco" />
 
+    <div class="form-group">
+        <input type="submit" value="Salvar" class="btn btn-primary" />
+        <a class="btn btn-info" asp-action="Index">Voltar</a>
+    </div>
+
+</form>
 
 @section Scripts {
     @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}

@@ -13,7 +13,7 @@
 <table class="table table-hover">
     <thead class="thead-dark">
         <tr>
-            <th>
+            <th width="320px">
                 @Html.DisplayNameFor(model => model.Nome)
             </th>
             <th>
@@ -64,7 +64,7 @@
                 @Html.DisplayFor(modelItem => item.DataRetorno)
             </td>
 
-            <td class="text-right" width="160px">
+            <td class="text-right" width="180px">
                 <a class="btn btn-info" asp-action="Details" asp-route-id="@item.Id"><span class="fa fa-search"></span></a>
                 <a class="btn btn-warning" asp-action="Edit" asp-route-id="@item.Id"><span class="fa fa-pencil"></span></a>
                 <a class="btn btn-danger" asp-action="Delete" asp-route-id="@item.Id"><span class="fa fa-trash"></span></a>

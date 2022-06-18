@@ -6,7 +6,7 @@ using Microsoft.EntityFrameworkCore.Metadata;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Prospectus.Data;
 
-namespace Prospectus.Data.Migrations
+namespace Prospectus.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
     partial class ApplicationDbContextModelSnapshot : ModelSnapshot
@@ -210,25 +210,42 @@ namespace Prospectus.Data.Migrations
                     b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd();
 
-                    b.Property<string>("Bairro");
+                    b.Property<string>("Bairro")
+                        .IsRequired()
+                        .HasColumnName("Bairro")
+                        .HasColumnType("varchar(60)");
 
                     b.Property<string>("CEP")
                         .IsRequired()
+                        .HasColumnType("varchar(8)")
                         .HasMaxLength(8);
 
-                    b.Property<string>("Cidade");
+                    b.Property<string>("Cidade")
+                        .IsRequired()
+                        .HasColumnType("varchar(60)")
+                        .HasMaxLength(60);
 
-                    b.Property<string>("Complemento");
+                    b.Property<string>("Complemento")
+                        .IsRequired()
+                        .HasColumnType("varchar(60)")
+                        .HasMaxLength(60);
 
                     b.Property<string>("Logradouro")
                         .IsRequired()
+                        .HasColumnType("varchar(60)")
                         .HasMaxLength(60);
 
-                    b.Property<string>("Numero");
+                    b.Property<string>("Numero")
+                        .IsRequired()
+                        .HasColumnType("varchar(60)")
+                        .HasMaxLength(60);
 
                     b.Property<Guid>("ProspectId");
 
-                    b.Property<string>("UF");
+                    b.Property<string>("UF")
+                        .IsRequired()
+                        .HasColumnType("varchar(2)")
+                        .HasMaxLength(2);
 
                     b.HasKey("Id");
 
@@ -243,11 +260,66 @@ namespace Prospectus.Data.Migrations
                     b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd();
 
-                    b.Property<string>("Nome");
+                    b.Property<string>("Nome")
+                        .IsRequired()
+                        .HasColumnType("varchar(60)")
+                        .HasMaxLength(60);
 
                     b.HasKey("Id");
 
                     b.ToTable("Indicadores");
+                });
+
+            modelBuilder.Entity("Prospectus.Models.Produto", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd();
+
+                    b.Property<DateTime>("DataCadastro")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnName("DataCadastro")
+                        .HasColumnType("datetime")
+                        .HasDefaultValueSql("getdate()");
+
+                    b.Property<string>("Descricao")
+                        .HasColumnName("Descricao")
+                        .HasColumnType("varchar(220)")
+                        .HasMaxLength(220);
+
+                    b.Property<string>("Imagem")
+                        .HasColumnType("varchar(100)");
+
+                    b.Property<string>("NCM")
+                        .IsRequired()
+                        .HasColumnName("NCM")
+                        .HasColumnType("varchar(8)")
+                        .HasMaxLength(8);
+
+                    b.Property<string>("Nome")
+                        .IsRequired()
+                        .HasColumnName("Nome")
+                        .HasColumnType("varchar(99)")
+                        .HasMaxLength(99);
+
+                    b.Property<decimal>("PrecoCompra");
+
+                    b.Property<decimal>("PrecoCusto");
+
+                    b.Property<decimal>("PrecoVenda");
+
+                    b.Property<string>("Unidade")
+                        .IsRequired()
+                        .HasColumnName("Unidade")
+                        .HasColumnType("varchar(3)")
+                        .HasMaxLength(3);
+
+                    b.Property<bool>("isAtivo");
+
+                    b.Property<bool>("isExcluido");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Produtos");
                 });
 
             modelBuilder.Entity("Prospectus.Models.Prospect", b =>
@@ -255,34 +327,55 @@ namespace Prospectus.Data.Migrations
                     b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd();
 
-                    b.Property<bool>("Cenario");
+                    b.Property<bool>("Cenario")
+                        .HasColumnName("Cenario")
+                        .HasColumnType("bit");
 
-                    b.Property<DateTime>("DataRetorno");
+                    b.Property<DateTime>("DataRetorno")
+                        .HasColumnName("DataRetorno")
+                        .HasColumnType("datetime");
 
-                    b.Property<DateTime>("DataVisita");
+                    b.Property<DateTime>("DataVisita")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("datetime")
+                        .HasDefaultValueSql("getdate()");
 
-                    b.Property<Guid>("IndicadorId");
+                    b.Property<Guid>("IndicadorId")
+                        .HasColumnName("IndicadorId");
 
                     b.Property<string>("Nome")
                         .IsRequired()
+                        .HasColumnType("varchar(200)")
                         .HasMaxLength(200);
 
                     b.Property<string>("Observacoes")
+                        .HasColumnName("Observacoes")
+                        .HasColumnType("nvarchar(200)")
                         .HasMaxLength(200);
 
-                    b.Property<string>("Oportunidade");
+                    b.Property<string>("Oportunidade")
+                        .HasColumnName("Oportunidade")
+                        .HasColumnType("nvarchar(120)");
 
                     b.Property<string>("PessoaContato")
                         .IsRequired()
+                        .HasColumnName("PessoaContato")
+                        .HasColumnType("varchar(60)")
                         .HasMaxLength(60);
 
                     b.Property<string>("Ramo")
                         .IsRequired()
+                        .HasColumnName("Ramo")
+                        .HasColumnType("varchar(120)")
                         .HasMaxLength(120);
 
-                    b.Property<int>("Recepcao");
+                    b.Property<int>("Recepcao")
+                        .HasColumnName("Recepcao")
+                        .HasColumnType("int");
 
-                    b.Property<int>("SatisfacaoCenario");
+                    b.Property<int>("SatisfacaoCenario")
+                        .HasColumnName("SatisfacaoCenario")
+                        .HasColumnType("int");
 
                     b.HasKey("Id");
 
@@ -369,7 +462,7 @@ namespace Prospectus.Data.Migrations
                     b.HasOne("Prospectus.Models.Prospect", "Prospect")
                         .WithOne("Endereco")
                         .HasForeignKey("Prospectus.Models.Endereco", "ProspectId")
-                        .OnDelete(DeleteBehavior.Cascade);
+                        .OnDelete(DeleteBehavior.Restrict);
                 });
 
             modelBuilder.Entity("Prospectus.Models.Prospect", b =>
@@ -377,7 +470,7 @@ namespace Prospectus.Data.Migrations
                     b.HasOne("Prospectus.Models.Indicador", "Indicador")
                         .WithMany("Prospects")
                         .HasForeignKey("IndicadorId")
-                        .OnDelete(DeleteBehavior.Cascade);
+                        .OnDelete(DeleteBehavior.Restrict);
                 });
 #pragma warning restore 612, 618
         }

@@ -56,3 +56,10 @@ D:\Projetos\Personal\ProspectusSolution\Prospectus\bin\Debug\netcoreapp2.2\libma
 D:\Projetos\Personal\ProspectusSolution\Prospectus\obj\Debug\netcoreapp2.2\Razor\Views\Prospects\_DetailsEndereco.cshtml.g.cs
 D:\Projetos\Personal\ProspectusSolution\Prospectus\obj\Debug\netcoreapp2.2\Razor\Views\ProspectEnderecos\Edit.cshtml.g.cs
 D:\Projetos\Personal\ProspectusSolution\Prospectus\obj\Debug\netcoreapp2.2\Razor\Views\Shared\_Layout_SemMenu_Com_LogOut.cshtml.g.cs
+D:\Projetos\Personal\ProspectusSolution\Prospectus\obj\Debug\netcoreapp2.2\Razor\Views\Prospects\Create_Backup.cshtml.g.cs
+D:\Projetos\Personal\ProspectusSolution\Prospectus\obj\Debug\netcoreapp2.2\Razor\Views\Prospects\_EnderecoProspect - Cópia.cshtml.g.cs
+D:\Projetos\Personal\ProspectusSolution\Prospectus\obj\Debug\netcoreapp2.2\Razor\Views\Produtos\Create.cshtml.g.cs
+D:\Projetos\Personal\ProspectusSolution\Prospectus\obj\Debug\netcoreapp2.2\Razor\Views\Produtos\Delete.cshtml.g.cs
+D:\Projetos\Personal\ProspectusSolution\Prospectus\obj\Debug\netcoreapp2.2\Razor\Views\Produtos\Details.cshtml.g.cs
+D:\Projetos\Personal\ProspectusSolution\Prospectus\obj\Debug\netcoreapp2.2\Razor\Views\Produtos\Edit.cshtml.g.cs
+D:\Projetos\Personal\ProspectusSolution\Prospectus\obj\Debug\netcoreapp2.2\Razor\Views\Produtos\Index.cshtml.g.cs

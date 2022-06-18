@@ -27,7 +27,7 @@ namespace Prospectus.Mappings
                 .HasColumnName("PessoaContato");
 
             builder.Property(p => p.DataVisita)
-                .HasColumnType("datatime")
+                .HasColumnType("datetime")
                 .HasDefaultValueSql("getdate()")
                 .IsRequired();
 
@@ -60,17 +60,22 @@ namespace Prospectus.Mappings
                 .HasColumnName("Observacoes");
 
             builder.Property(p => p.DataRetorno)
-                .HasColumnType("datatime")
+                .HasColumnType("datetime")
                 .HasColumnName("DataRetorno")
                 //.HasDefaultValueSql("getdate()")
                 .IsRequired();
 
 
-            //builder.Property(p => p.IndicadorId)
-            //    .HasColumnName("IndicadorId")
-            //    .HasColumnType("guid");
+            builder.Property(p => p.IndicadorId)
+                .IsRequired()
+                .HasColumnName("IndicadorId");
 
-
+            /*
+            builder.HasOne(p => p.Indicador)
+                .WithMany(i => i.Prospects)
+                .HasForeignKey(p => p.IndicadorId)
+                .OnDelete(DeleteBehavior.Restrict);
+            */
 
             builder.HasOne(p => p.Endereco)
                 .WithOne(e => e.Prospect)
