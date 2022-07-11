@@ -44,7 +44,9 @@ namespace Prospectus.Models
         [StringLength(8, ErrorMessage = "O campo {0} deve ter {1} caracteres numéricos", MinimumLength = 8)]
         public string NCM { get; set; }
 
+        public Guid OportunidadeId { get; set; }
 
+        public Oportunidade Oportunidade { get; set; }
 
     }
 }

@@ -2,7 +2,6 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
@@ -11,26 +10,22 @@ using Prospectus.Models;
 
 namespace Prospectus.Controllers
 {
-    [Authorize]
-    public class ProdutosController : Controller
+    public class OportunidadesController : Controller
     {
         private readonly ApplicationDbContext _context;
 
-        public ProdutosController(ApplicationDbContext context)
+        public OportunidadesController(ApplicationDbContext context)
         {
             _context = context;
         }
 
-        // GET: Produtos
-        [Authorize(Policy ="Listar")]
+        // GET: Oportunidades
         public async Task<IActionResult> Index()
         {
-            var applicationDbContext = _context.Produtos;
-            return View(await applicationDbContext.ToListAsync());
+            return View(await _context.Oportunidades.ToListAsync());
         }
 
-        // GET: Produtos/Details/5
-        [Authorize(Policy = "Ler")]
+        // GET: Oportunidades/Details/5
         public async Task<IActionResult> Details(Guid? id)
         {
             if (id == null)
@@ -38,44 +33,40 @@ namespace Prospectus.Controllers
                 return NotFound();
             }
 
-            var produto = await _context.Produtos
+            var oportunidade = await _context.Oportunidades
                 .FirstOrDefaultAsync(m => m.Id == id);
-            if (produto == null)
+            if (oportunidade == null)
             {
                 return NotFound();
             }
 
-            return View(produto);
+            return View(oportunidade);
         }
 
-        // GET: Produtos/Create
-        [Authorize(Policy ="Criar")]
+        // GET: Oportunidades/Create
         public IActionResult Create()
         {
-            ViewData["OportunidadeId"] = new SelectList(_context.Oportunidades, "Id", "Nome");
             return View();
         }
 
-        // POST: Produtos/Create
+        // POST: Oportunidades/Create
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create(Produto produto)
+        public async Task<IActionResult> Create([Bind("Id,Nome,Descricao")] Oportunidade oportunidade)
         {
             if (ModelState.IsValid)
             {
-                produto.Id = Guid.NewGuid();
-                _context.Add(produto);
+                oportunidade.Id = Guid.NewGuid();
+                _context.Add(oportunidade);
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
-            ViewData["OportunidadeId"] = new SelectList(_context.Oportunidades, "Id", "Nome",produto.OportunidadeId);
-            return View(produto);
+            return View(oportunidade);
         }
 
-        // GET: Produtos/Edit/5
-        [Authorize(Policy ="Editar")]
+        // GET: Oportunidades/Edit/5
         public async Task<IActionResult> Edit(Guid? id)
         {
             if (id == null)
@@ -83,24 +74,22 @@ namespace Prospectus.Controllers
                 return NotFound();
             }
 
-            var produto = await _context.Produtos.FindAsync(id);
-            if (produto == null)
+            var oportunidade = await _context.Oportunidades.FindAsync(id);
+            if (oportunidade == null)
             {
                 return NotFound();
             }
-
-            ViewData["OportunidadeId"] = new SelectList(_context.Oportunidades, "Id", "Nome", produto.OportunidadeId);
-            return View(produto);
+            return View(oportunidade);
         }
 
-        // POST: Produtos/Edit/5
+        // POST: Oportunidades/Edit/5
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(Guid id, Produto produto)
+        public async Task<IActionResult> Edit(Guid id, [Bind("Id,Nome,Descricao")] Oportunidade oportunidade)
         {
-            if (id != produto.Id)
+            if (id != oportunidade.Id)
             {
                 return NotFound();
             }
@@ -109,13 +98,12 @@ namespace Prospectus.Controllers
             {
                 try
                 {
-                    produto.DataCadastro.ToString("yyyy-MM-ddTHH:mm:ss.fff");
-                    _context.Update(produto);
+                    _context.Update(oportunidade);
                     await _context.SaveChangesAsync();
                 }
                 catch (DbUpdateConcurrencyException)
                 {
-                    if (!ProdutoExists(produto.Id))
+                    if (!OportunidadeExists(oportunidade.Id))
                     {
                         return NotFound();
                     }
@@ -126,13 +114,10 @@ namespace Prospectus.Controllers
                 }
                 return RedirectToAction(nameof(Index));
             }
-
-            ViewData["OportunidadeId"] = new SelectList(_context.Oportunidades, "Id", "Nome", produto.OportunidadeId);
-            return View(produto);
+            return View(oportunidade);
         }
 
-        // GET: Produtos/Delete/5
-        [Authorize(Policy = "Excluir")]
+        // GET: Oportunidades/Delete/5
         public async Task<IActionResult> Delete(Guid? id)
         {
             if (id == null)
@@ -140,30 +125,30 @@ namespace Prospectus.Controllers
                 return NotFound();
             }
 
-            var produto = await _context.Produtos
+            var oportunidade = await _context.Oportunidades
                 .FirstOrDefaultAsync(m => m.Id == id);
-            if (produto == null)
+            if (oportunidade == null)
             {
                 return NotFound();
             }
 
-            return View(produto);
+            return View(oportunidade);
         }
 
-        // POST: Produtos/Delete/5
+        // POST: Oportunidades/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(Guid id)
         {
-            var produto = await _context.Produtos.FindAsync(id);
-            _context.Produtos.Remove(produto);
+            var oportunidade = await _context.Oportunidades.FindAsync(id);
+            _context.Oportunidades.Remove(oportunidade);
             await _context.SaveChangesAsync();
             return RedirectToAction(nameof(Index));
         }
 
-        private bool ProdutoExists(Guid id)
+        private bool OportunidadeExists(Guid id)
         {
-            return _context.Produtos.Any(e => e.Id == id);
+            return _context.Oportunidades.Any(e => e.Id == id);
         }
     }
 }

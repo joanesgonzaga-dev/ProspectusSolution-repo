@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Builder;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.HttpsPolicy;
@@ -10,6 +11,7 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Prospectus.Data;
+using Prospectus.Extensions;
 using System;
 using System.Collections.Generic;
 using System.Globalization;
@@ -44,8 +46,26 @@ namespace Prospectus
 
 
             services.AddDefaultIdentity<IdentityUser>()
+                .AddRoles<IdentityRole>()
                 .AddDefaultUI(UIFramework.Bootstrap4)
                 .AddEntityFrameworkStores<ApplicationDbContext>();
+
+            #region policy
+
+            //Código abaixo registra o middleware de autorização como um serviço e define a diretiva a ser avaliada
+            services.AddAuthorization(options =>
+            {
+                //options.AddPolicy("PodeExcluir", policy => policy.RequireClaim("PodeExcluir"));
+                options.AddPolicy("Criar", policy => policy.Requirements.Add(new PermissaoNecessaria("Criar")));
+                options.AddPolicy("Excluir", policy => policy.Requirements.Add(new PermissaoNecessaria("Excluir")));
+                options.AddPolicy("Listar", policy => policy.Requirements.Add(new PermissaoNecessaria("Listar")));
+                options.AddPolicy("Ler", policy => policy.Requirements.Add(new PermissaoNecessaria("Ler")));
+                options.AddPolicy("Editar", policy => policy.Requirements.Add(new PermissaoNecessaria("Editar")));
+            }
+                );
+
+            services.AddSingleton<IAuthorizationHandler, PermissaoProdutoHandler>();
+            #endregion
 
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_2);
         }

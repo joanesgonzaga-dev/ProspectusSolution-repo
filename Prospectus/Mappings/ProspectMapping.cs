@@ -1,4 +1,5 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿
+using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 using Prospectus.Models;
 using System;
@@ -36,9 +37,7 @@ namespace Prospectus.Mappings
                 .HasColumnType("varchar(120)")
                 .HasColumnName("Ramo");
 
-            builder.Property(p => p.Oportunidade)
-                .HasColumnType("nvarchar(120)")
-                .HasColumnName("Oportunidade");
+            
 
             builder.Property(p => p.Recepcao)
                 .IsRequired()
@@ -69,6 +68,8 @@ namespace Prospectus.Mappings
             builder.Property(p => p.IndicadorId)
                 .IsRequired()
                 .HasColumnName("IndicadorId");
+
+            
 
             /*
             builder.HasOne(p => p.Indicador)

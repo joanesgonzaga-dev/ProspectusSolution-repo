@@ -62,7 +62,9 @@ namespace Prospectus.Data
         public DbSet<Contato> Contatos { get; set; }
         public DbSet<Indicador> Indicadores { get; set; }
         public DbSet<Endereco> Enderecos { get; set; }
-
         public DbSet<Produto> Produtos { get; set; }
+
+        public DbSet<Oportunidade> Oportunidades { get; set; }
+        
     }
 }

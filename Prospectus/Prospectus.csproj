@@ -21,6 +21,14 @@
     <Compile Remove="Migrations\20220614010732_InitialDatabase.Designer.cs" />
     <Compile Remove="Migrations\20220614011309_InitialDataBase.cs" />
     <Compile Remove="Migrations\20220614011309_InitialDataBase.Designer.cs" />
+    <Compile Remove="Migrations\20220624023816_Oportunidade_Produtos.cs" />
+    <Compile Remove="Migrations\20220624023816_Oportunidade_Produtos.Designer.cs" />
+    <Compile Remove="Migrations\20220625215446_Oportunidade.cs" />
+    <Compile Remove="Migrations\20220625215446_Oportunidade.Designer.cs" />
+    <Compile Remove="Migrations\20220625230405_RelacionamentoProdutoOportunidade.cs" />
+    <Compile Remove="Migrations\20220625230405_RelacionamentoProdutoOportunidade.Designer.cs" />
+    <Compile Remove="Migrations\20220626011023_RelacionamentoProdutoOportunidade.cs" />
+    <Compile Remove="Migrations\20220626011023_RelacionamentoProdutoOportunidade.Designer.cs" />
   </ItemGroup>
 
   <ItemGroup>
@@ -63,6 +71,7 @@
 
   <ItemGroup>
     <Folder Include="Data\Migrations\" />
+    <Folder Include="NovaPasta\" />
   </ItemGroup>
 
 </Project>

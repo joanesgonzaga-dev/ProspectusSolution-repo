@@ -1,4 +1,6 @@
-﻿using System;
+﻿
+
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
@@ -22,6 +24,7 @@ namespace Prospectus.Controllers
         }
 
         // GET: Prospects
+        [Authorize(Policy = "Listar")]
         public async Task<IActionResult> Index()
         {
             var applicationDbContext = _context.Prospects.Include(p => p.Indicador);
@@ -29,6 +32,7 @@ namespace Prospectus.Controllers
         }
 
         // GET: Prospects/Details/5
+        [Authorize(Policy = "Ler")]
         public async Task<IActionResult> Details(Guid? id)
         {
             if (id == null)
@@ -49,9 +53,11 @@ namespace Prospectus.Controllers
         }
 
         // GET: Prospects/Create
+        [Authorize(Policy = "Criar")]
         public IActionResult Create()
         {
             ViewData["IndicadorId"] = new SelectList(_context.Indicadores, "Id", "Nome");
+            ViewData["OportunidadeId"] = new SelectList(_context.Oportunidades, "Id", "Nome");
             //ViewData["EnderecoId"] = new SelectList(_context.Indicadores, "Id", "Logradouro");
             return View();
         }
@@ -70,11 +76,13 @@ namespace Prospectus.Controllers
                 return RedirectToAction(nameof(Index));
             }
             ViewData["IndicadorId"] = new SelectList(_context.Indicadores, "Id", "Nome", prospect.IndicadorId);
+            ViewData["OportunidadeId"] = new SelectList(_context.Oportunidades, "Id", "Nome", prospect.OportunidadeId);
             //ViewData["EnderecoId"] = new SelectList(_context.Indicadores, "Id", "Logradouro");
             return View(prospect);
         }
 
         // GET: Prospects/Edit/5
+        [Authorize(Policy = "Editar")]
         public async Task<IActionResult> Edit(Guid? id)
         {
             if (id == null)
@@ -89,6 +97,7 @@ namespace Prospectus.Controllers
                 return NotFound();
             }
             ViewData["IndicadorId"] = new SelectList(_context.Indicadores, "Id", "Nome", prospect.IndicadorId);
+            ViewData["OportunidadeId"] = new SelectList(_context.Oportunidades, "Id", "Nome", prospect.OportunidadeId);
             return View(prospect);
         }
 
@@ -129,6 +138,8 @@ namespace Prospectus.Controllers
         }
 
         // GET: Prospects/Delete/5
+        //[Authorize(Roles ="Admin")]
+        [Authorize(Policy = "Excluir")]
         public async Task<IActionResult> Delete(Guid? id)
         {
             if (id == null)

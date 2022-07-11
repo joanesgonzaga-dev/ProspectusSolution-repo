@@ -75,6 +75,12 @@
                 <span asp-validation-for="Imagem" class="text-danger"></span>
             </div>
 
+            <div class="form-group">
+                <label asp-for="OportunidadeId" class="control-label">Oportunidade</label>
+                <select asp-for="OportunidadeId" class="form-control" asp-items="ViewBag.OportunidadeId"></select>
+                <span asp-validation-for="OportunidadeId" class="text-danger"></span>
+            </div>
+
         </div>
 
         <div class="form-group col-md-3">

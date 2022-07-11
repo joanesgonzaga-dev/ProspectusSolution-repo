@@ -10,8 +10,8 @@ using Prospectus.Data;
 namespace Prospectus.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20220614012338_MigrationInicial")]
-    partial class MigrationInicial
+    [Migration("20220626181040_RemoveEnderecoComplementoRequired")]
+    partial class RemoveEnderecoComplementoRequired
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -228,7 +228,6 @@ namespace Prospectus.Migrations
                         .HasMaxLength(60);
 
                     b.Property<string>("Complemento")
-                        .IsRequired()
                         .HasColumnType("varchar(60)")
                         .HasMaxLength(60);
 
@@ -272,6 +271,23 @@ namespace Prospectus.Migrations
                     b.ToTable("Indicadores");
                 });
 
+            modelBuilder.Entity("Prospectus.Models.Oportunidade", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd();
+
+                    b.Property<string>("Descricao")
+                        .HasColumnType("varchar(250)");
+
+                    b.Property<string>("Nome")
+                        .IsRequired()
+                        .HasMaxLength(60);
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Oportunidades");
+                });
+
             modelBuilder.Entity("Prospectus.Models.Produto", b =>
                 {
                     b.Property<Guid>("Id")
@@ -303,6 +319,8 @@ namespace Prospectus.Migrations
                         .HasColumnType("varchar(99)")
                         .HasMaxLength(99);
 
+                    b.Property<Guid>("OportunidadeId");
+
                     b.Property<decimal>("PrecoCompra");
 
                     b.Property<decimal>("PrecoCusto");
@@ -320,6 +338,8 @@ namespace Prospectus.Migrations
                     b.Property<bool>("isExcluido");
 
                     b.HasKey("Id");
+
+                    b.HasIndex("OportunidadeId");
 
                     b.ToTable("Produtos");
                 });
@@ -355,9 +375,7 @@ namespace Prospectus.Migrations
                         .HasColumnType("nvarchar(200)")
                         .HasMaxLength(200);
 
-                    b.Property<string>("Oportunidade")
-                        .HasColumnName("Oportunidade")
-                        .HasColumnType("nvarchar(120)");
+                    b.Property<Guid>("OportunidadeId");
 
                     b.Property<string>("PessoaContato")
                         .IsRequired()
@@ -382,6 +400,8 @@ namespace Prospectus.Migrations
                     b.HasKey("Id");
 
                     b.HasIndex("IndicadorId");
+
+                    b.HasIndex("OportunidadeId");
 
                     b.ToTable("Prospects");
                 });
@@ -451,12 +471,12 @@ namespace Prospectus.Migrations
                     b.HasOne("Prospectus.Models.Prospect", "Prospect")
                         .WithMany("Contatos")
                         .HasForeignKey("ProspectId")
-                        .OnDelete(DeleteBehavior.Cascade);
+                        .OnDelete(DeleteBehavior.Restrict);
 
                     b.HasOne("Prospectus.Models.TipoContato", "TipoContato")
                         .WithMany()
                         .HasForeignKey("TipoContatoId")
-                        .OnDelete(DeleteBehavior.Cascade);
+                        .OnDelete(DeleteBehavior.Restrict);
                 });
 
             modelBuilder.Entity("Prospectus.Models.Endereco", b =>
@@ -467,11 +487,24 @@ namespace Prospectus.Migrations
                         .OnDelete(DeleteBehavior.Restrict);
                 });
 
+            modelBuilder.Entity("Prospectus.Models.Produto", b =>
+                {
+                    b.HasOne("Prospectus.Models.Oportunidade", "Oportunidade")
+                        .WithMany("Produtos")
+                        .HasForeignKey("OportunidadeId")
+                        .OnDelete(DeleteBehavior.Restrict);
+                });
+
             modelBuilder.Entity("Prospectus.Models.Prospect", b =>
                 {
                     b.HasOne("Prospectus.Models.Indicador", "Indicador")
                         .WithMany("Prospects")
                         .HasForeignKey("IndicadorId")
+                        .OnDelete(DeleteBehavior.Restrict);
+
+                    b.HasOne("Prospectus.Models.Oportunidade", "Oportunidade")
+                        .WithMany("Prospects")
+                        .HasForeignKey("OportunidadeId")
                         .OnDelete(DeleteBehavior.Restrict);
                 });
 #pragma warning restore 612, 618

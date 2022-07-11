@@ -4,7 +4,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace Prospectus.Migrations
 {
-    public partial class MigrationInicial : Migration
+    public partial class InitialMigration : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -60,25 +60,16 @@ namespace Prospectus.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "Produtos",
+                name: "Oportunidades",
                 columns: table => new
                 {
                     Id = table.Column<Guid>(nullable: false),
-                    Nome = table.Column<string>(type: "varchar(99)", maxLength: 99, nullable: false),
-                    Descricao = table.Column<string>(type: "varchar(220)", maxLength: 220, nullable: true),
-                    Unidade = table.Column<string>(type: "varchar(3)", maxLength: 3, nullable: false),
-                    Imagem = table.Column<string>(type: "varchar(100)", nullable: true),
-                    DataCadastro = table.Column<DateTime>(type: "datetime", nullable: false, defaultValueSql: "getdate()"),
-                    PrecoCompra = table.Column<decimal>(nullable: false),
-                    PrecoCusto = table.Column<decimal>(nullable: false),
-                    PrecoVenda = table.Column<decimal>(nullable: false),
-                    isAtivo = table.Column<bool>(nullable: false),
-                    isExcluido = table.Column<bool>(nullable: false),
-                    NCM = table.Column<string>(type: "varchar(8)", maxLength: 8, nullable: false)
+                    Nome = table.Column<string>(maxLength: 60, nullable: false),
+                    Descricao = table.Column<string>(type: "varchar(250)", nullable: true)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Produtos", x => x.Id);
+                    table.PrimaryKey("PK_Oportunidades", x => x.Id);
                 });
 
             migrationBuilder.CreateTable(
@@ -202,6 +193,35 @@ namespace Prospectus.Migrations
                 });
 
             migrationBuilder.CreateTable(
+                name: "Produtos",
+                columns: table => new
+                {
+                    Id = table.Column<Guid>(nullable: false),
+                    Nome = table.Column<string>(type: "varchar(99)", maxLength: 99, nullable: false),
+                    Descricao = table.Column<string>(type: "varchar(220)", maxLength: 220, nullable: true),
+                    Unidade = table.Column<string>(type: "varchar(3)", maxLength: 3, nullable: false),
+                    Imagem = table.Column<string>(type: "varchar(100)", nullable: true),
+                    DataCadastro = table.Column<DateTime>(type: "datetime", nullable: false, defaultValueSql: "getdate()"),
+                    PrecoCompra = table.Column<decimal>(nullable: false),
+                    PrecoCusto = table.Column<decimal>(nullable: false),
+                    PrecoVenda = table.Column<decimal>(nullable: false),
+                    isAtivo = table.Column<bool>(nullable: false),
+                    isExcluido = table.Column<bool>(nullable: false),
+                    NCM = table.Column<string>(type: "varchar(8)", maxLength: 8, nullable: false),
+                    OportunidadeId = table.Column<Guid>(nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Produtos", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_Produtos_Oportunidades_OportunidadeId",
+                        column: x => x.OportunidadeId,
+                        principalTable: "Oportunidades",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Restrict);
+                });
+
+            migrationBuilder.CreateTable(
                 name: "Prospects",
                 columns: table => new
                 {
@@ -210,13 +230,13 @@ namespace Prospectus.Migrations
                     PessoaContato = table.Column<string>(type: "varchar(60)", maxLength: 60, nullable: false),
                     DataVisita = table.Column<DateTime>(type: "datetime", nullable: false, defaultValueSql: "getdate()"),
                     Ramo = table.Column<string>(type: "varchar(120)", maxLength: 120, nullable: false),
-                    Oportunidade = table.Column<string>(type: "nvarchar(120)", nullable: true),
                     Recepcao = table.Column<int>(type: "int", nullable: false),
                     Cenario = table.Column<bool>(type: "bit", nullable: false),
                     SatisfacaoCenario = table.Column<int>(type: "int", nullable: false),
                     Observacoes = table.Column<string>(type: "nvarchar(200)", maxLength: 200, nullable: true),
                     DataRetorno = table.Column<DateTime>(type: "datetime", nullable: false),
-                    IndicadorId = table.Column<Guid>(nullable: false)
+                    IndicadorId = table.Column<Guid>(nullable: false),
+                    OportunidadeId = table.Column<Guid>(nullable: false)
                 },
                 constraints: table =>
                 {
@@ -225,6 +245,12 @@ namespace Prospectus.Migrations
                         name: "FK_Prospects_Indicadores_IndicadorId",
                         column: x => x.IndicadorId,
                         principalTable: "Indicadores",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Restrict);
+                    table.ForeignKey(
+                        name: "FK_Prospects_Oportunidades_OportunidadeId",
+                        column: x => x.OportunidadeId,
+                        principalTable: "Oportunidades",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Restrict);
                 });
@@ -246,13 +272,13 @@ namespace Prospectus.Migrations
                         column: x => x.ProspectId,
                         principalTable: "Prospects",
                         principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
+                        onDelete: ReferentialAction.Restrict);
                     table.ForeignKey(
                         name: "FK_Contatos_TipoContato_TipoContatoId",
                         column: x => x.TipoContatoId,
                         principalTable: "TipoContato",
                         principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
+                        onDelete: ReferentialAction.Restrict);
                 });
 
             migrationBuilder.CreateTable(
@@ -336,9 +362,19 @@ namespace Prospectus.Migrations
                 unique: true);
 
             migrationBuilder.CreateIndex(
+                name: "IX_Produtos_OportunidadeId",
+                table: "Produtos",
+                column: "OportunidadeId");
+
+            migrationBuilder.CreateIndex(
                 name: "IX_Prospects_IndicadorId",
                 table: "Prospects",
                 column: "IndicadorId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Prospects_OportunidadeId",
+                table: "Prospects",
+                column: "OportunidadeId");
         }
 
         protected override void Down(MigrationBuilder migrationBuilder)
@@ -381,6 +417,9 @@ namespace Prospectus.Migrations
 
             migrationBuilder.DropTable(
                 name: "Indicadores");
+
+            migrationBuilder.DropTable(
+                name: "Oportunidades");
         }
     }
 }

@@ -1,7 +1,9 @@
-﻿using System;
+﻿
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Threading.Tasks;
 
@@ -33,8 +35,6 @@ namespace Prospectus.Models
         [DisplayName("Ramo de Atividade")]
         public string Ramo { get; set; }
 
-        public string Oportunidade { get; set; }
-
         [DisplayName("Receptividade")]
         [Required(ErrorMessage = "O campo {0} é obrigatório")]
         public RecepcaoEnum Recepcao { get; set; }  //Talvez o nome correto seja Qualificacao
@@ -60,5 +60,9 @@ namespace Prospectus.Models
 
         [DisplayName("Endereço")]
         public Endereco Endereco { get; set; }
+
+        public Guid OportunidadeId { get; set; }
+
+        public Oportunidade Oportunidade { get; set; }
     }
 }

@@ -1,4 +1,6 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿
+
+using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 using Prospectus.Models;
 using System;
@@ -50,7 +52,7 @@ namespace Prospectus.Mappings
                 .ValueGeneratedOnAdd()
                 .IsRequired();
 
-           
+            //builder.Property();
 
         }
     }

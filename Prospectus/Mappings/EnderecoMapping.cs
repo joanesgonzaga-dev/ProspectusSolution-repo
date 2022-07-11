@@ -27,7 +27,7 @@ namespace Prospectus.Mappings
                 .HasMaxLength(60);
 
             builder.Property(e => e.Complemento)
-                .IsRequired()
+                
                 .HasColumnType("varchar(60)")
                 .HasMaxLength(60);
 

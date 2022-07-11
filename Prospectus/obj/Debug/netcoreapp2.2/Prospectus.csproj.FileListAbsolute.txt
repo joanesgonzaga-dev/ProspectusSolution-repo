@@ -63,3 +63,8 @@ D:\Projetos\Personal\ProspectusSolution\Prospectus\obj\Debug\netcoreapp2.2\Razor
 D:\Projetos\Personal\ProspectusSolution\Prospectus\obj\Debug\netcoreapp2.2\Razor\Views\Produtos\Details.cshtml.g.cs
 D:\Projetos\Personal\ProspectusSolution\Prospectus\obj\Debug\netcoreapp2.2\Razor\Views\Produtos\Edit.cshtml.g.cs
 D:\Projetos\Personal\ProspectusSolution\Prospectus\obj\Debug\netcoreapp2.2\Razor\Views\Produtos\Index.cshtml.g.cs
+D:\Projetos\Personal\ProspectusSolution\Prospectus\obj\Debug\netcoreapp2.2\Razor\Views\Oportunidades\Create.cshtml.g.cs
+D:\Projetos\Personal\ProspectusSolution\Prospectus\obj\Debug\netcoreapp2.2\Razor\Views\Oportunidades\Delete.cshtml.g.cs
+D:\Projetos\Personal\ProspectusSolution\Prospectus\obj\Debug\netcoreapp2.2\Razor\Views\Oportunidades\Details.cshtml.g.cs
+D:\Projetos\Personal\ProspectusSolution\Prospectus\obj\Debug\netcoreapp2.2\Razor\Views\Oportunidades\Edit.cshtml.g.cs
+D:\Projetos\Personal\ProspectusSolution\Prospectus\obj\Debug\netcoreapp2.2\Razor\Views\Oportunidades\Index.cshtml.g.cs
