@@ -29,7 +29,6 @@ namespace Prospectus
 
         public IConfiguration Configuration { get; }
 
-        // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
             services.Configure<CookiePolicyOptions>(options =>
@@ -43,29 +42,10 @@ namespace Prospectus
                 options.UseSqlServer(
                     Configuration.GetConnectionString("DefaultConnection")));
 
-
-
             services.AddDefaultIdentity<IdentityUser>()
                 .AddRoles<IdentityRole>()
                 .AddDefaultUI(UIFramework.Bootstrap4)
                 .AddEntityFrameworkStores<ApplicationDbContext>();
-
-            #region policy
-
-            //Código abaixo registra o middleware de autorização como um serviço e define a diretiva a ser avaliada
-            services.AddAuthorization(options =>
-            {
-                //options.AddPolicy("PodeExcluir", policy => policy.RequireClaim("PodeExcluir"));
-                options.AddPolicy("Criar", policy => policy.Requirements.Add(new PermissaoNecessaria("Criar")));
-                options.AddPolicy("Excluir", policy => policy.Requirements.Add(new PermissaoNecessaria("Excluir")));
-                options.AddPolicy("Listar", policy => policy.Requirements.Add(new PermissaoNecessaria("Listar")));
-                options.AddPolicy("Ler", policy => policy.Requirements.Add(new PermissaoNecessaria("Ler")));
-                options.AddPolicy("Editar", policy => policy.Requirements.Add(new PermissaoNecessaria("Editar")));
-            }
-                );
-
-            services.AddSingleton<IAuthorizationHandler, PermissaoProdutoHandler>();
-            #endregion
 
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_2);
         }

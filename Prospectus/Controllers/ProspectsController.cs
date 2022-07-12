@@ -9,6 +9,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using Prospectus.Data;
+using Prospectus.Extensions;
 using Prospectus.Models;
 
 namespace Prospectus.Controllers
@@ -24,7 +25,7 @@ namespace Prospectus.Controllers
         }
 
         // GET: Prospects
-        [Authorize(Policy = "Listar")]
+        [ClaimsAuthorize("ProspectPermission", "List")]
         public async Task<IActionResult> Index()
         {
             var applicationDbContext = _context.Prospects.Include(p => p.Indicador);
@@ -32,7 +33,7 @@ namespace Prospectus.Controllers
         }
 
         // GET: Prospects/Details/5
-        [Authorize(Policy = "Ler")]
+        [ClaimsAuthorize("ProspectPermission", "View")]
         public async Task<IActionResult> Details(Guid? id)
         {
             if (id == null)
@@ -53,7 +54,7 @@ namespace Prospectus.Controllers
         }
 
         // GET: Prospects/Create
-        [Authorize(Policy = "Criar")]
+        [ClaimsAuthorize("ProspectPermission", "Create")]
         public IActionResult Create()
         {
             ViewData["IndicadorId"] = new SelectList(_context.Indicadores, "Id", "Nome");
@@ -82,7 +83,7 @@ namespace Prospectus.Controllers
         }
 
         // GET: Prospects/Edit/5
-        [Authorize(Policy = "Editar")]
+        [ClaimsAuthorize("ProspectPermission", "Edit")]
         public async Task<IActionResult> Edit(Guid? id)
         {
             if (id == null)
@@ -139,7 +140,7 @@ namespace Prospectus.Controllers
 
         // GET: Prospects/Delete/5
         //[Authorize(Roles ="Admin")]
-        [Authorize(Policy = "Excluir")]
+        [ClaimsAuthorize("ProspectPermission", "Delete")]
         public async Task<IActionResult> Delete(Guid? id)
         {
             if (id == null)
